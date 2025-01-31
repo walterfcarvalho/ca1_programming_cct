@@ -8,6 +8,10 @@ public enum AnimalType {
     MAMAL,
     REPTILE;
 
+    /**
+     * Returns a string representation of enum value 
+     * @return string
+    */
     public String toString() {
         switch (this) {
             case AMPHIBIAN:
@@ -24,7 +28,10 @@ public enum AnimalType {
         return null;
     }
   
-
+    /**
+     * Returns all possibles values for enum
+     * @return string
+    */
     public String allValues() {
         String res = "";
         AnimalType[] types = this.getDeclaringClass().getEnumConstants();

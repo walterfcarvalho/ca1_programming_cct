@@ -12,21 +12,31 @@ import java.util.Scanner;
 public class ScannerClass {
     Scanner scanner;
 
-
+    /**
+     * Constructor for uour class Scanner
+     */
     public ScannerClass(){
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * returns an Stringwith all caracters before last ENTER
+     * @return String
+     */
     public String nextLine(){
         return scanner.nextLine();
     }
 
 
-    /*
-        This method will receive a int value.
-        Will show a message in case of invalid int and return -1
-        otherwize.
+    /**
+     * 
+     * This method will receive a int value.
+     * Will show a message in case of invalid int and return -1
+     * otherwize.
+     * 
+     * @return an int value read from key board in case of error returns -1.
     */
+
     public int getInt(){
         int res = -1;
         try {

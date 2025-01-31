@@ -6,8 +6,6 @@ import com.walterfcarvalho.ca01programming.domain.enums.AnimalType;
  * Provide a class to Animal type mammals.
  * structure to our application
  * 
- * @author Valter Carvalho
- * @since 1.0
  */
 
 public class Mammal extends AnimalZoo {
@@ -18,6 +16,12 @@ public class Mammal extends AnimalZoo {
     public Mammal(){
         super();
     }
+
+    /**
+     * Contructor for Animal Mam
+     * See Animal.class for details 
+     * @throws Exception
+    */ 
     public Mammal(String habitat, String name, String specie, String weight, String dateOfBird,
             String mamaryGlands)  throws Exception {
         super(habitat, name, specie, AnimalType.MAMAL, weight, dateOfBird);

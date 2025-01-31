@@ -11,6 +11,11 @@ public class Fish extends AnimalZoo {
         super();
     }
 
+    /**
+     * Contructor for Animal Fish
+     * See Animal.class for details 
+     * @throws Exception
+    */
     public Fish(String habitat, String name, String specie, String weight, String dateOfBird,
             String family) throws Exception  {
         super(habitat, name, specie, AnimalType.FISH, weight, dateOfBird);
@@ -25,8 +30,9 @@ public class Fish extends AnimalZoo {
         this.family = family;
     }
 
-    /*
-     * This method will print to concole all data a Object bird has
+    /**
+     * toString
+     * See Animal.class for details 
      */
     public String toString() {
         return super.toString() +

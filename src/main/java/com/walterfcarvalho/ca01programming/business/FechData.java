@@ -13,10 +13,16 @@ import java.util.Scanner;
  */
 public class FechData {
 
+    // constructor for the class
     public FechData() {
 
     }
 
+    /**
+     * 
+     * @return Arraylist with all animals read from file. 
+     * @throws Exception For reading erros or S.O. erros
+     */
     public ArrayList<AnimalZoo> loadAnimalList() throws Exception {
         // list witch keep Animals list
         ArrayList<AnimalZoo> animals = new ArrayList<>();
@@ -52,6 +58,13 @@ public class FechData {
         return animals;
     }
 
+
+    /**
+     * This methos will read file and normalize fie fields from 3,1,2,1 params per line to
+     *  1 param per line 
+     * @return 
+     * @throws Exception for struture errros during file reading
+     */
     @SuppressWarnings("resource")
     private ArrayList<String[]> readFile() throws Exception {
         int lineCount = 1;
@@ -101,5 +114,4 @@ public class FechData {
         }
         return list;
     }
-
 }

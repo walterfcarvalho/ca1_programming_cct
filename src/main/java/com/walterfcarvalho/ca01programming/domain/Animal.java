@@ -14,8 +14,6 @@ import java.util.Locale;
  * Provide a abstract class Animal witch contains all
  * structure to our application
  * 
- * @author Valter Carvalho
- * @since 1.0
  */
 public abstract class Animal {
 
@@ -29,12 +27,26 @@ public abstract class Animal {
     private Date dateOfBird;
     private AnimalType type;
 
+    /**
+     * Default constructor
+    */
     public Animal() {
 
     }
 
+    /**
+     * Constructor with proper params
+     * 
+     * @param habitat habitat compatible with Habitat.class
+     * @param name name from animal
+     * @param specie  animal specie
+     * @param type animal AnimalType compatible with enum AnimalType
+     * @param weight string that represents weight 
+     * @String date  string that represents  date of bird
+    */
     public Animal(String habitat, String name, String specie,
             AnimalType type, String weight, String date) throws IllegalArgumentException {
+
         String errors = "";
 
         double nWeight = 0;
@@ -131,7 +143,7 @@ public abstract class Animal {
     }
 
     /*
-     * This method will print to concole all data a Object animal has
+     * This method will print to console all data a Object animal has
      */
     @Override
     public String toString() {
@@ -148,29 +160,30 @@ public abstract class Animal {
 
     /**
      * 
-     * This method will search inside object for a value
+     * This method will search inside object fields for a value
      * 
+     * @param field field user wish search for
+     * @param value value for field
+     * @return true when a value in field is found, otherwise false.
      */
     public boolean hasStringValue(String field, String value) {
         boolean result = false;
 
         HashMap<String, String> objectInfo = this.getAllFieldsAndValues();
 
-        if (field.isEmpty()) {
-
+        // when field is empty perform a seardh in all fields
+        if (field.isEmpty())
             result = objectInfo.containsValue(value);
 
-        } else {
-            if (objectInfo.containsKey(field) && objectInfo.containsValue(value)) {
-                result = true;
-            }
+        else if (objectInfo.containsKey(field) && objectInfo.containsValue(value))
+            result = true;
 
-        }
         return result;
     }
 
     /**
      * This method will return all fields from this Object
+     * @return array with all fields class has
      */
     public ArrayList<Field> getFields() {
 
@@ -190,8 +203,7 @@ public abstract class Animal {
 
                 fieldList.add(field);
             }
-
-            // Now I go to the superclass
+            // search fields on superclass
             objectClass = objectClass.getSuperclass();
         }
         return fieldList;
@@ -199,6 +211,7 @@ public abstract class Animal {
 
     /**
      * This method will return a hasmap with all fields an values of an object
+     * @return Hashmap with all fields and values object has.
      */
     public HashMap<String, String> getAllFieldsAndValues() {
         HashMap<String, String> fieldValue = new HashMap<>();
@@ -229,7 +242,6 @@ public abstract class Animal {
                 System.out.println("Error during fetching object data: " + e.getMessage());
             }
         }
-
         return fieldValue;
     }
 

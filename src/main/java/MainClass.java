@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class MainClass {
 
     static ArrayList<AnimalZoo> appAnimals = new ArrayList<>();
-    static AppMessages appMessages = new AppMessages();
+    static AppMessages appMessages = new AppMessages("eng");
     static ScannerClass appScanner = new ScannerClass();
 
     public static void main(String[] args) throws Exception {
@@ -40,6 +40,9 @@ public class MainClass {
 
     }
 
+    /*
+     * This method will show menu  for manage animals menu
+    */
     private static void manageAnimals() {
 
         if (appAnimals.isEmpty()) {
@@ -131,7 +134,7 @@ public class MainClass {
     }
 
     /**
-     *  This methos will return an HasMap with all fields used by domain classes in your application
+     *  This method will return an HashMap, with all fields used by domain classes in your application
      */
     private static ArrayList<String> getAllFieldsDomainClasses(){
 
@@ -203,7 +206,7 @@ public class MainClass {
 
     /**
      * This method will print all record on the screen
-     * animals: ArrayList<AnimalZoo> with animals shoud be printed 
+     *  @param animals ArrayList<AnimalZoo> with animals shoud be printed 
     */
     private static void printRecords(ArrayList<AnimalZoo> animals) {
 

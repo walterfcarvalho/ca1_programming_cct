@@ -6,8 +6,6 @@ import com.walterfcarvalho.ca01programming.domain.enums.AnimalType;
  * Provide a abstract class AnimalZoo witch can be extended for better
  * representation
  * 
- * @author Valter Carvalho
- * @since 1.0
  */
 public class Reptile extends AnimalZoo {
 
@@ -17,7 +15,11 @@ public class Reptile extends AnimalZoo {
     public Reptile(){
         super();
     }
-    
+
+    /**
+     * Contructor for Animal Reptile
+     * See Animal.class for details 
+    */
     public Reptile(String habitat, String name, String specie, 
         String weight, String dateOfBird, String immigrant) throws Exception {
         super( habitat, name, specie, AnimalType.REPTILE, weight, dateOfBird);
@@ -47,10 +49,11 @@ public class Reptile extends AnimalZoo {
     public void setIsLand(boolean isLayEgg) {
         this.isLayEgg = isLayEgg;
     }
-    /*
-     * This method will print to concole all data a Object Reptile has
-     */
 
+    /**
+     * toString
+     * See Animal.class for details 
+    */
     public String toString() {
         return super.toString() +
                 "\n\nProperties from Reptile only " +

@@ -7,10 +7,18 @@ public class Bird extends AnimalZoo {
     // defines if this bird migrates or not
     private boolean isImigrant;
 
+    /**
+     * DEfault constructor
+     */
     public Bird(){
         super();
     }
 
+    /**
+     * Contructor for Animal Bird
+     * See Animal.class for details 
+     * @throws Exception
+     */
     public Bird(String habitat, String name, String specie, String weight, String dateOfBird,
             String imigrant) throws Exception {
         super(habitat, name, specie, AnimalType.BIRD, weight, dateOfBird);
@@ -32,6 +40,7 @@ public class Bird extends AnimalZoo {
         setImigrant(isImigrant);
     }
 
+    
     public boolean isImigrant() {
         return isImigrant;
     }
@@ -42,6 +51,7 @@ public class Bird extends AnimalZoo {
 
     /*
      * This method will print to concole all data a Object bird has
+     * See Animal contructor for details.
      */
     public String toString() {
         return super.toString() +

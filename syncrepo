@@ -1,0 +1,3 @@
+#!/bin/sh
+cd /Users/valter/Documents/CCT/programming/t2-integrated-ca-1-sba24317/ca01Programming
+cp -R * /Users/valter/Documents/Java/CA1_PRO

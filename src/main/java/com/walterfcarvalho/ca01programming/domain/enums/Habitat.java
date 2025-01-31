@@ -27,7 +27,8 @@ public class Habitat {
     /**
      * this method can test if a string can repesent
      * a habitat enviroment
-     */
+     * @param habitat we intent check
+    */
     public static boolean validHabitat(String habitat) {
         boolean res = false;
 
@@ -40,6 +41,10 @@ public class Habitat {
         return res;
     }
 
+    /**
+     * Return all possibles values
+     * @return a string with all possible values
+     */
     public static String getAll() {
         String res = "";
 
