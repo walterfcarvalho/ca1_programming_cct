@@ -1,0 +1,20 @@
+bird,BrazilianEagle,Real Brazilian
+Rainforest
+2022/12/12,127.4
+false
+bird,Parrot,Einsten
+Rainforest
+2021/01/20,2.1
+true
+fish,tuna,Red Tuna
+Artic sea
+2017/05/03,17.0
+bluefin
+mamal,PolarBear,polarbear
+Artic islands
+1999/01/1,480.0
+2
+reptile,Constrictor snake, sucuri
+forest
+2020/12/13,27
+false
