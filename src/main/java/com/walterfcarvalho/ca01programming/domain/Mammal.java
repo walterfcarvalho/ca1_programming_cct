@@ -8,7 +8,7 @@ import com.walterfcarvalho.ca01programming.domain.enums.AnimalType;
  * 
  */
 
-public class Mammal extends AnimalZoo {
+public class Mammal extends Animal {
 
     // determine how many mamaml glands a mamal has
     private short mamaryGlands;

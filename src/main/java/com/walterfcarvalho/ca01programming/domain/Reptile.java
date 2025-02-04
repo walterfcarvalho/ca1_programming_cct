@@ -3,11 +3,11 @@ package com.walterfcarvalho.ca01programming.domain;
 import com.walterfcarvalho.ca01programming.domain.enums.AnimalType;
 
 /**
- * Provide a abstract class AnimalZoo witch can be extended for better
+ * Provide a abstract class Animal witch can be extended for better
  * representation
  * 
  */
-public class Reptile extends AnimalZoo {
+public class Reptile extends Animal {
 
     // This property defines is a animal either aquatico or not
     private boolean isLayEgg;

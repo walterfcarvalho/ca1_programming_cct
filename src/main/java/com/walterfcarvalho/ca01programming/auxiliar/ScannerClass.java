@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 /**
  * This class will have responsible for data input through keyboard
- * @author valter
  */
 public class ScannerClass {
     Scanner scanner;
@@ -27,7 +26,6 @@ public class ScannerClass {
         return scanner.nextLine();
     }
 
-
     /**
      * 
      * This method will receive a int value.
@@ -37,6 +35,10 @@ public class ScannerClass {
      * @return an int value read from key board in case of error returns -1.
     */
 
+    /**
+     *  Returns a integer value inputed by keyboard
+     *  in case invalid integer inputed, an error will be printed
+     */
     public int getInt(){
         int res = -1;
         try {

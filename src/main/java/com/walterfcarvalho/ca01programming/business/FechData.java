@@ -23,16 +23,16 @@ public class FechData {
      * @return Arraylist with all animals read from file. 
      * @throws Exception For reading erros or S.O. erros
      */
-    public ArrayList<AnimalZoo> loadAnimalList() throws Exception {
+    public ArrayList<Animal> loadAnimalList() throws Exception {
         // list witch keep Animals list
-        ArrayList<AnimalZoo> animals = new ArrayList<>();
+        ArrayList<Animal> animals = new ArrayList<>();
 
         // this list keeps data read from file
         ArrayList<String[]> txtFields = this.readFile();
         
         for (String[] item : txtFields) {
             try {
-                AnimalZoo animal = null;
+                Animal animal = null;
 
                 if (item[0].equals(AnimalType.BIRD.toString())) {
                     animal = new Bird(item[3], item[2], item[1], item[5], item[4], item[6]);
@@ -53,15 +53,14 @@ public class FechData {
             } catch (Exception e) {
                 System.out.println("\nError during Animal database loading: " + e.getMessage() + " \nLines: " + item[7]);
             }
-        }
-        
+        }   
         return animals;
     }
 
 
     /**
      * This methos will read file and normalize fie fields from 3,1,2,1 params per line to
-     *  1 param per line 
+     * 1 param per line.
      * @return 
      * @throws Exception for struture errros during file reading
      */

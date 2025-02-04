@@ -13,7 +13,6 @@ import java.util.Locale;
 /**
  * Provide a abstract class Animal witch contains all
  * structure to our application
- * 
  */
 public abstract class Animal {
 

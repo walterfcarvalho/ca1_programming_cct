@@ -2,7 +2,7 @@
 import com.walterfcarvalho.ca01programming.auxiliar.AppMessages;
 import com.walterfcarvalho.ca01programming.auxiliar.ScannerClass;
 import com.walterfcarvalho.ca01programming.business.FechData;
-import com.walterfcarvalho.ca01programming.domain.AnimalZoo;
+import com.walterfcarvalho.ca01programming.domain.Animal;
 import com.walterfcarvalho.ca01programming.domain.Bird;
 import com.walterfcarvalho.ca01programming.domain.Fish;
 import com.walterfcarvalho.ca01programming.domain.Mammal;
@@ -14,7 +14,8 @@ import java.util.HashMap;
 
 public class MainClass {
 
-    static ArrayList<AnimalZoo> appAnimals = new ArrayList<>();
+    static ArrayList<Animal> appAnimals = new ArrayList<>();
+
     static AppMessages appMessages = new AppMessages("eng");
     static ScannerClass appScanner = new ScannerClass();
 
@@ -37,36 +38,36 @@ public class MainClass {
         } while (menuOption != 0);
 
         appMessages.showMessage(15, 15);
-
     }
 
     /*
-     * This method will show menu  for manage animals menu
-    */
+     * This method will show menu for manage animals menu
+     */
     private static void manageAnimals() {
 
         if (appAnimals.isEmpty()) {
             appMessages.clearConsole();
             appMessages.showMessage(21); // Please run first the option 'Import Animal database from...
             appScanner.nextLine();
+            return;
         }
 
         short menuOption = 0;
-
         do {
             appMessages.clearConsole();
+            appMessages.showMessage(12); // Choose one option bellow, or 0 to leave this menu
             appMessages.showMessage(19, 19); // 1 - List all animals \n2 - Find animals...");
 
             menuOption = (short) appScanner.getInt();
             switch (menuOption) {
                 case 1:
-                    printAllRecords(); ///
+                    printAllRecords(); // go to print all records feature
                     break;
                 case 2:
-                    findPrinBySpecificField();
+                    findPrinBySpecificField(); // go to find and print by specific field
                     break;
                 case 3:
-                    findAnyField();
+                    findAnyField(); // go to find and print by any field
                     break;
             }
         } while (menuOption != 0);
@@ -74,87 +75,109 @@ public class MainClass {
 
     /*
      * This method will serach in record by a value in a specific field.
-    */
+     */
     private static void findPrinBySpecificField() {
         // Get all fields possibilities
         ArrayList<String> classesFields = getAllFieldsDomainClasses();
 
-        String strField= "";
+        String strField = "";
         String strTerm = "";
-      
-        // mout list of fields to show in screen
+
+        // mount list of fields to show in screen
         String options = "";
-        for(int i=0; i < classesFields.size();i++){
+        for (int i = 0; i < classesFields.size(); i++) {
 
-            String strOpt = (i<9) ? "\n " : "\n";
+            String strOpt = (i < 9) ? "\n " : "\n";
 
-            options += strOpt + (i+1) + " - " + classesFields.get(i);
+            options += strOpt + (i + 1) + " - " + classesFields.get(i);
         }
 
+        // show options
         short menuOption = -1;
         do {
             appMessages.clearConsole();
             appMessages.showMessage(29, options);
-        
+
+
             menuOption = (short) appScanner.getInt();
 
-            if (menuOption < 1 | menuOption > classesFields.size() ){
-                appMessages.showMessage(30, ("" + classesFields.size()) ); // \nInvalid option. Should be between %s and...
+            if (menuOption < 1 | menuOption > classesFields.size()) {
+                appMessages.showMessage(30, ("" + classesFields.size())); // \nInvalid option. Should be between %s
+                                                                          // and...
                 appScanner.nextLine();
             }
         } while (menuOption < 1 | menuOption > classesFields.size());
 
-        appMessages.showMessage(31, classesFields.get(menuOption-1) ); // \nInvalid option. Should be between %s and...
-        
+        appMessages.showMessage(31, classesFields.get(menuOption - 1)); // Inform the value you wish should be search in field 
+        appMessages.showMessage(32); // (note, for date format ...)
+
         strTerm = appScanner.nextLine();
 
-        strField = classesFields.get(menuOption-1);
+        strField = classesFields.get(menuOption - 1).split(" \\(")[0];
 
-        ArrayList<AnimalZoo> result = new ArrayList<>();
-      
-        for ( AnimalZoo animal: appAnimals){
-            
-            HashMap<String, String>  hashAnimal = animal.getAllFieldsAndValues();
+        ArrayList<Animal> result = new ArrayList<>();
 
-            if (hashAnimal.containsKey(strField) && hashAnimal.get(strField).contains(strTerm))
-               result.add(animal);
+        for (Animal animal : appAnimals) {
+
+            HashMap<String, String> hashAnimal = animal.getAllFieldsAndValues();
+
+            // check is object has properties we are loking for regardless case.
+            if (hashAnimal.containsKey(strField) && hashAnimal.get(strField).toUpperCase().contains(strTerm.toUpperCase()))
+                result.add(animal);
         }
 
-        if( result.isEmpty()) {
+        // when no record matches search
+        if (result.isEmpty()) {
             appMessages.showMessage(27, strTerm); // No Record found with term \"%s\"...
             appScanner.nextLine();
             return;
         }
-        
-        appMessages.showMessage(28, ("" +result.size()), strTerm); // Found \"%s\" record(s) with term \"%s\". (Press ENTER to continue)");
+
+        // when some record matches search
+        appMessages.showMessage(28, ("" + result.size()), strTerm); // Found \"%s\" record(s) with term \"%s\". (Press
+                                                                                // ENTER to continue)");
         appScanner.nextLine();
-        
-        printRecords(result);
-        appScanner.nextLine();        
+        printFoundRecords(result);
+        appScanner.nextLine();
     }
 
     /**
-     *  This method will return an HashMap, with all fields used by domain classes in your application
+     * This method will return a HashMap, with all fields used by domain classes in
+     * your application
      */
-    private static ArrayList<String> getAllFieldsDomainClasses(){
+    private static ArrayList<String> getAllFieldsDomainClasses() {
 
         ArrayList<String> fields = new ArrayList<>();
 
-        ArrayList<AnimalZoo> listAnimals = new ArrayList<>(); 
+        ArrayList<Animal> listAnimals = new ArrayList<>();
         listAnimals.add(new Bird());
         listAnimals.add(new Fish());
         listAnimals.add(new Mammal());
         listAnimals.add(new Reptile());
 
-        for ( AnimalZoo animal : listAnimals){
+        for (Animal animal : listAnimals) {
             ArrayList<Field> objFields = animal.getFields();
-            
-            for(Field field: objFields)
-                if(!fields.contains(field.getName())) 
-                    fields.add(field.getName());
+
+            for (Field field : objFields) {
+
+                // get datatype from field
+                // when type is some.some.some.Type we filter to return only "type"
+                int lastIndex = field.getType().getName().lastIndexOf(".");
+                String fieldName = "";
+                if (lastIndex == -1)
+                    fieldName = field.getName() + " (" + field.getType().getName() + ")";
+                else {
+                    fieldName =  "" + field.getType();
+                    fieldName = field.getName() +" ( " + fieldName.substring(fieldName.lastIndexOf(".") +1,  fieldName.length()) + " )";
+                }
+
+                // check for repeated field
+                if (!fields.contains(fieldName))
+                    fields.add(fieldName);
+            }
         }
         // sort arraylist
-        fields.sort((a, b) -> -1 * b.compareTo(a) );
+        fields.sort((a, b) -> -1 * b.compareTo(a));
         return fields;
     }
 
@@ -169,36 +192,37 @@ public class MainClass {
 
         String term = appScanner.nextLine();
 
-        ArrayList<AnimalZoo> animalsFounds = new ArrayList<>();
+        ArrayList<Animal> animalsFounds = new ArrayList<>();
 
-        for (AnimalZoo animal : appAnimals) {
+        for (Animal animal : appAnimals) {
             if (animal.hasStringValue("", term)) {
                 animalsFounds.add(animal);
             }
         }
 
+        // if no record matches search
         if (animalsFounds.isEmpty()) {
             appMessages.showMessage(27, term); // No Record found with this term: %...
             appScanner.nextLine();
-        } else {
-            appMessages.showMessage(28, ("" + animalsFounds.size()), term); // Found %s records with this term...
-            appScanner.nextLine();
-
-            printRecords(animalsFounds);
-
-            appScanner.nextLine();
+            return;
         }
+
+        appMessages.showMessage(28, ("" + animalsFounds.size()), term); // Found %s records with this term...
+        
+        appScanner.nextLine();
+        printFoundRecords(animalsFounds);
+        appScanner.nextLine();
     }
 
     /**
-     * This method  will print all record on the screen
+     * This method will print all record on the screen
      */
     private static void printAllRecords() {
         appMessages.clearConsole();
         appMessages.showMessage(24); // This feature will print all records...
         appScanner.nextLine();
 
-        printRecords(appAnimals);
+        printFoundRecords(appAnimals);
 
         appMessages.showMessage(25); // This feature will print all records...
         appScanner.nextLine();
@@ -206,11 +230,12 @@ public class MainClass {
 
     /**
      * This method will print all record on the screen
-     *  @param animals ArrayList<AnimalZoo> with animals shoud be printed 
-    */
-    private static void printRecords(ArrayList<AnimalZoo> animals) {
+     * 
+     * @param animals ArrayList<Animal> with animals shoud be printed
+     */
+    private static void printFoundRecords(ArrayList<Animal> animals) {
 
-        for (AnimalZoo item : animals) 
+        for (Animal item : animals)
             System.out.println(item.toString());
     }
 

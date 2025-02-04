@@ -2,7 +2,7 @@ package com.walterfcarvalho.ca01programming.domain;
 
 import com.walterfcarvalho.ca01programming.domain.enums.AnimalType;
 
-public class Fish extends AnimalZoo {
+public class Fish extends Animal {
 
     // defines if this bird migrates or not
     private String family;
